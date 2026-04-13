@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INPUT.OS — v2.6.1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =============================================
+         BOOT OVERLAY — aparece por 2s no carregamento
+    ============================================= -->
+    <div class="boot-overlay" id="bootOverlay">
+        <div class="boot-inner">
+            <div class="boot-logo">input/<strong>OS</strong></div>
+            <div class="boot-bar"><div class="boot-progress" id="bootProgress"></div></div>
+            <div class="boot-status" id="bootStatus">INITIALIZING KERNEL...</div>
+        </div>
+    </div>
+
+    <!-- =============================================
+         HEADER — não modificado (estrutura original)
+    ============================================= -->
+    <header class="main-header">
+        <div class="header-inner">
+            
+            <div class="logo-box">
+                <a href="index.html">
+                    <img src="imagens/input-logo.svg" alt="Logo INPUT">
+                </a>
+            </div>
+
+            <nav class="nav-container">
+                <div class="menu-wrapper">
+                    
+                    <div class="nav-links">
+                        <a href="#pesquisa" class="nav-item">PESQUISA</a>
+                        <a href="#extensao" class="nav-item">EXTENSÃO</a>
+                        <a href="#projetos" class="nav-item">PROJETOS</a>
+                        <a href="#pessoas" class="nav-item">PESSOAS</a>
+                    </div>
+                    
+                    <div class="circle-icon">
+                        <a href="mailto:lab.input@gmail.com" class="nav-icon">
+                            <i data-lucide="mail" class="nav-icon"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="wave-area">
+                    <svg id="wave-svg" viewBox="0 0 1000 50" preserveAspectRatio="none">
+                        <path id="wave-path" d="M 0 50 L 1000 50" stroke="#D2D2D2" stroke-width="1" fill="transparent" />
+                    </svg>
+                </div>
+
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- =============================================
+             HERO — terminal de boot + identificação do sistema
+             Tela cheia, texto aparece linha a linha como terminal
+        ============================================= -->
+        <section class="hero" id="hero">
+
+            <!-- grade de fundo FUI -->
+            <div class="hero-grid-bg"></div>
+
+            <!-- canto superior esquerdo: coordenadas do sistema -->
+            <div class="sys-corner sys-corner--tl">
+                <span class="sys-label">SYS.NODE</span>
+                <span class="sys-value" id="sysNode">INPUT-LAB-0x3F</span>
+            </div>
+
+            <!-- canto superior direito: clock ao vivo -->
+            <div class="sys-corner sys-corner--tr">
+                <span class="sys-label">SYS.TIME</span>
+                <span class="sys-value" id="sysClock">--:--:--</span>
+            </div>
+
+            <!-- bloco central: identidade do grupo -->
+            <div class="hero-center">
+                <div class="hero-tag">// SERVIDOR DE PESQUISA ATIVO</div>
+                <h1 class="hero-title">
+                    <span class="hero-title-line" data-delay="0">Inovação</span>
+                    <span class="hero-title-line" data-delay="1">em Produtos</span>
+                    <span class="hero-title-line" data-delay="2">& Ubiquidade</span>
+                    <span class="hero-title-line" data-delay="3">das Tecnologias</span>
+                </h1>
+                <div class="hero-readout">
+                    <div class="readout-item">
+                        <span class="readout-key">GRUPO</span>
+                        <span class="readout-val">INPUT</span>
+                    </div>
+                    <div class="readout-sep">|</div>
+                    <div class="readout-item">
+                        <span class="readout-key">INST</span>
+                        <span class="readout-val">UFPE</span>
+                    </div>
+                    <div class="readout-sep">|</div>
+                    <div class="readout-item">
+                        <span class="readout-key">STATUS</span>
+                        <span class="readout-val blink-dot">ONLINE</span>
+                    </div>
+                    <div class="readout-sep">|</div>
+                    <div class="readout-item">
+                        <span class="readout-key">CNPq</span>
+                        <span class="readout-val">CERTIFICADO</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- canto inferior esquerdo: coordenada geográfica -->
+            <div class="sys-corner sys-corner--bl">
+                <span class="sys-value">-8.0476° S, 34.8770° W</span>
+                <span class="sys-label">RECIFE, BRASIL</span>
+            </div>
+
+            <!-- indicador de scroll -->
+            <div class="scroll">
+                <div class="scroll-indicator">
+                    <i data-lucide="mouse" class="icon-scroll"></i>
+                    <p class="scroll-label">SCROLL</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- =============================================
+             SEÇÃO SOBRE — painel de status do sistema
+             Fundo branco com borda + leitura de parâmetros
+        ============================================= -->
+        <section class="sobre-section" id="sobre">
+            <div class="os-panel">
+
+                <!-- barra de título do painel, estilo janela de sistema -->
+                <div class="panel-titlebar">
+                    <div class="panel-dots">
+                        <span></span><!--<span></span><span></span>-->
+                    </div>
+                    <span class="panel-title">about.<strong>SYS</strong> | GRUPO DE PESQUISA INPUT</span>
+                    <span class="panel-tag">PID 001</span>
+                </div>
+
+                <div class="panel-body sobre-body">
+
+                    <!-- coluna esquerda: texto -->
+                    <div class="sobre-text">
+                        <p class="terminal-line"><span class="t-prompt">$</span> cat /about/manifesto.txt</p>
+                        <p class="sobre-desc">
+                            Investigamos a relação entre pessoas, produtos e tecnologias — explorando como objetos e sistemas digitais se tornam parte invisível do cotidiano humano.
+                        </p>
+                        <p class="sobre-desc sobre-desc--sub">
+                            Nossa operação se organiza em torno da interseção entre design de interação, computação ubíqua e inovação em produtos — com foco em pesquisa aplicada e extensão universitária.
+                        </p>
+                    </div>
+
+                    <!-- coluna direita: parâmetros do sistema -->
+                    <div class="sobre-params">
+                        <div class="param-row">
+                            <span class="param-key">KERNEL</span>
+                            <span class="param-bar"><span style="width:100%"></span></span>
+                            <span class="param-val">INPUT.OS v2.6</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-key">UPTIME</span>
+                            <span class="param-bar"><span style="width:88%"></span></span>
+                            <span class="param-val" id="uptimeVal">6 ANOS</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-key">MEMBERS</span>
+                            <span class="param-bar"><span style="width:60%"></span></span>
+                            <span class="param-val">03 ACTIVE</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-key">PROJECTS</span>
+                            <span class="param-bar"><span style="width:75%"></span></span>
+                            <span class="param-val">03 RUNNING</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-key">PUBLICATIONS</span>
+                            <span class="param-bar"><span style="width:55%"></span></span>
+                            <span class="param-val">12+ INDEXED</span>
+                        </div>
+                        <div class="param-row">
+                            <span class="param-key">CNPQ</span>
+                            <span class="param-bar"><span style="width:100%"></span></span>
+                            <span class="param-val">CERTIFIED</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =============================================
+             SEÇÃO PESQUISA — módulos de pesquisa como processos
+             Linhas de pesquisa = processos ativos no sistema
+        ============================================= -->
+        <section class="pesquisa-section" id="pesquisa">
+            <div class="os-panel dark-panel">
+
+                <div class="panel-titlebar dark-titlebar">
+                    <div class="panel-dots dark-dots">
+                        <span></span><!--<span></span><span></span>-->
+                    </div>
+                    <span class="panel-title">research.<strong>SYS</strong> | MÓDULOS ATIVOS</span>
+                    <span class="panel-tag">PID 002</span>
+                </div>
+
+                <div class="panel-body">
+
+                    <!-- processos ativos: linhas de pesquisa -->
+                    <div class="process-table">
+                        <div class="process-header">
+                            <span>PID</span>
+                            <span>MÓDULO</span>
+                            <span>DESCRIÇÃO</span>
+                            <span>STATUS</span>
+                            <span>CPU%</span>
+                        </div>
+
+                        <div class="process-row" data-pid="R01">
+                            <span class="proc-pid">R-01</span>
+                            <span class="proc-name">DESIGN.INTERACAO</span>
+                            <span class="proc-desc">Interfaces, experiência de uso e mediação tecnológica em produtos digitais e físicos.</span>
+                            <span class="proc-status running">RUNNING</span>
+                            <span class="proc-cpu">87%</span>
+                        </div>
+
+                        <div class="process-row" data-pid="R02">
+                            <span class="proc-pid">R-02</span>
+                            <span class="proc-name">UBIQUIDADE.IOT</span>
+                            <span class="proc-desc">Computação pervasiva, sistemas embarcados e integração de dispositivos ao ambiente.</span>
+                            <span class="proc-status running">RUNNING</span>
+                            <span class="proc-cpu">64%</span>
+                        </div>
+
+                        <div class="process-row" data-pid="R03">
+                            <span class="proc-pid">R-03</span>
+                            <span class="proc-name">INOVACAO.PRODUTOS</span>
+                            <span class="proc-desc">Desenvolvimento de produto orientado a tecnologia — prototipagem e validação.</span>
+                            <span class="proc-status running">RUNNING</span>
+                            <span class="proc-cpu">72%</span>
+                        </div>
+
+                    </div>
+
+                    <!-- separador -->
+                    <div class="dark-divider"></div>
+
+                    <!-- log de publicações -->
+                    <div class="log-header">
+                        <span class="terminal-line"><span class="t-prompt t-prompt--dark">$</span> tail -n 4 /var/log/publications.log</span>
+                    </div>
+
+                    <div class="log-list">
+                        <div class="log-entry">
+                            <span class="log-ts">[2024]</span>
+                            <span class="log-msg">Interação Ubíqua em Ambientes Educacionais — <em>SBC</em></span>
+                            <a href="#" class="log-link"><i data-lucide="arrow-up-right"></i></a>
+                        </div>
+                        <div class="log-entry">
+                            <span class="log-ts">[2023]</span>
+                            <span class="log-msg">Prototipagem Rápida e Validação de Produtos Digitais — <em>Rev. Brasileira de Design</em></span>
+                            <a href="#" class="log-link"><i data-lucide="arrow-up-right"></i></a>
+                        </div>
+                        <div class="log-entry">
+                            <span class="log-ts">[2023]</span>
+                            <span class="log-msg">Experiência do Usuário em Sistemas Pervasivos — <em>IHC</em></span>
+                            <a href="#" class="log-link"><i data-lucide="arrow-up-right"></i></a>
+                        </div>
+                        <div class="log-entry">
+                            <span class="log-ts">[2022]</span>
+                            <span class="log-msg">Affordances em Dispositivos IoT Domésticos — <em>CBIE</em></span>
+                            <a href="#" class="log-link"><i data-lucide="arrow-up-right"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =============================================
+             SEÇÃO PROJETOS — dashboard de jobs em execução
+             Cards horizontais com progress bars e status
+        ============================================= -->
+        <section class="projetos-section" id="projetos">
+            <div class="content-limit">
+
+                <div class="section-os-header">
+                    <div class="os-breadcrumb">
+                        <span>input/<strong>OS</strong></span>
+                        <span class="bc-sep">/</span>
+                        <span>projects</span>
+                        <span class="bc-sep">/</span>
+                        <span class="bc-active">active</span>
+                    </div>
+                    <span class="section-cmd">ls -la /projects/</span>
+                </div>
+
+                <div class="projetos-grid">
+
+                    <div class="job-card">
+                        <div class="job-header">
+                            <span class="job-id">PROJETO-001</span>
+                            <span class="job-badge active">ACTIVE</span>
+                        </div>
+                        <h3 class="job-title">Interface Adaptativa para Ambientes Educacionais Ubíquos</h3>
+                        <div class="job-progress-wrap">
+                            <div class="job-progress-bar">
+                                <div class="job-progress-fill" style="width: 68%"></div>
+                            </div>
+                            <span class="job-pct">68%</span>
+                        </div>
+                        <div class="job-meta">
+                            <span><i data-lucide="clock" class="meta-icon"></i> 2023 — presente</span>
+                            <a href="#" class="job-link">OPEN →</a>
+                        </div>
+                    </div>
+
+                    <div class="job-card">
+                        <div class="job-header">
+                            <span class="job-id">PROJETO-002</span>
+                            <span class="job-badge active">ACTIVE</span>
+                        </div>
+                        <h3 class="job-title">Prototipagem de Produtos com Computação Física</h3>
+                        <div class="job-progress-wrap">
+                            <div class="job-progress-bar">
+                                <div class="job-progress-fill" style="width: 34%"></div>
+                            </div>
+                            <span class="job-pct">34%</span>
+                        </div>
+                        <div class="job-meta">
+                            <span><i data-lucide="clock" class="meta-icon"></i> 2024 — presente</span>
+                            <a href="#" class="job-link">OPEN →</a>
+                        </div>
+                    </div>
+
+                    <div class="job-card">
+                        <div class="job-header">
+                            <span class="job-id">PROJETO-003</span>
+                            <span class="job-badge done">DONE</span>
+                        </div>
+                        <h3 class="job-title">Mapeamento de Experiências em Wearables</h3>
+                        <div class="job-progress-wrap">
+                            <div class="job-progress-bar">
+                                <div class="job-progress-fill done-fill" style="width: 100%"></div>
+                            </div>
+                            <span class="job-pct">100%</span>
+                        </div>
+                        <div class="job-meta">
+                            <span><i data-lucide="clock" class="meta-icon"></i> 2021 — 2023</span>
+                            <a href="#" class="job-link">OPEN →</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =============================================
+             SEÇÃO EXTENSÃO — métricas de output do sistema
+             Números grandes em estilo dashboard de monitoramento
+        ============================================= -->
+        <section class="extensao-section" id="extensao">
+            <div class="os-panel">
+
+                <div class="panel-titlebar">
+                    <div class="panel-dots">
+                        <span></span><!-- <span></span><span></span>-->
+                    </div>
+                    <span class="panel-title">MONITOR.SYS — EXTENSÃO & IMPACTO</span>
+                    <span class="panel-tag">PID 004</span>
+                </div>
+
+                <div class="panel-body extensao-body">
+
+                    <!-- métricas em grid -->
+                    <div class="metrics-grid">
+                        <div class="metric-block">
+                            <span class="metric-num" data-target="12">00</span>
+                            <span class="metric-unit">+</span>
+                            <span class="metric-label">WORKSHOPS<br>REALIZADOS</span>
+                        </div>
+                        <div class="metric-block">
+                            <span class="metric-num" data-target="300">000</span>
+                            <span class="metric-unit">+</span>
+                            <span class="metric-label">PARTICIPANTES<br>IMPACTADOS</span>
+                        </div>
+                        <div class="metric-block">
+                            <span class="metric-num" data-target="6">0</span>
+                            <span class="metric-unit">Y</span>
+                            <span class="metric-label">ANOS DE<br>OPERAÇÃO</span>
+                        </div>
+                        <div class="metric-block">
+                            <span class="metric-num" data-target="12">00</span>
+                            <span class="metric-unit">+</span>
+                            <span class="metric-label">PUBLICAÇÕES<br>INDEXADAS</span>
+                        </div>
+                    </div>
+
+                    <!-- terminal de atividades recentes -->
+                    <div class="activity-log">
+                        <p class="terminal-line"><span class="t-prompt">$</span> tail -f /var/log/extensao.log</p>
+                        <p class="activity-entry"><span class="act-ts">2024-08</span> Workshop de Prototipagem Física — UFPE, Recife</p>
+                        <p class="activity-entry"><span class="act-ts">2024-05</span> Minicurso: Introdução à Computação Ubíqua — Semana de TI</p>
+                        <p class="activity-entry"><span class="act-ts">2023-11</span> Palestra: Design e Inovação no Contexto Acadêmico — CAIn</p>
+                        <p class="activity-entry"><span class="act-ts">2023-06</span> Hackathon de Dispositivos Conectados — parceria externa</p>
+                        <p class="activity-entry blink-cursor">_</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =============================================
+             SEÇÃO PESSOAS — user registry do sistema
+             Membros como entradas num diretório de usuários
+        ============================================= -->
+        <section class="pessoas-section" id="pessoas">
+
+            <!-- título bg mantido da estrutura original -->
+            <h2 class="bg-title">pessoas</h2>
+
+            <div class="pessoas-grid">
+
+                <!-- mosaico de fotos — mantido da estrutura original -->
+                <div class="image-mosaic">
+                    <img src="imagens/adailton.jpeg" alt="Adailton">
+                    <img src="imagens/danilo.jpeg" alt="Danilo">
+                    <img src="imagens/rattes.jpeg" alt="Rattes">
+                </div>
+
+                <!-- user registry -->
+                <div class="info-box registry-box">
+                    <div class="registry-header">
+                        <span class="terminal-line"><span class="t-prompt t-prompt--dark">$</span> cat /etc/passwd | grep INPUT</span>
+                    </div>
+
+                    <div class="registry-list">
+
+                        <div class="registry-entry">
+                            <div class="reg-uid">UID:001</div>
+                            <div class="reg-info">
+                                <p class="reg-name">Adailton Silva</p>
+                                <p class="reg-role">ROOT — Pesquisador Líder</p>
+                                <p class="reg-shell">/bin/research — UFPE</p>
+                            </div>
+                            <div class="reg-status online"></div>
+                        </div>
+
+                        <div class="registry-entry">
+                            <div class="reg-uid">UID:002</div>
+                            <div class="reg-info">
+                                <p class="reg-name">Danilo Arnaud</p>
+                                <p class="reg-role">SUDOER — Pesquisador</p>
+                                <p class="reg-shell">/bin/research — UFPE</p>
+                            </div>
+                            <div class="reg-status online"></div>
+                        </div>
+
+                        <div class="registry-entry">
+                            <div class="reg-uid">UID:003</div>
+                            <div class="reg-info">
+                                <p class="reg-name">Rattes</p>
+                                <p class="reg-role">SUDOER — Pesquisador</p>
+                                <p class="reg-shell">/bin/research — UFPE</p>
+                            </div>
+                            <div class="reg-status online"></div>
+                        </div>
+
+                    </div>
+
+                    <a href="#" class="btn-link registry-link">cat /etc/group/input →</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =============================================
+             SEÇÃO CONTATO — terminal de input/output
+             Campo de e-mail estilizado como prompt de sistema
+        ============================================= -->
+        <section class="contato-section" id="contato">
+            <div class="contato-terminal">
+
+                <div class="panel-titlebar">
+                    <div class="panel-dots">
+                        <span></span><!--<span></span><span></span>-->
+                    </div>
+                    <span class="panel-title">connect.<strong>SYS</strong> | ESTABELECER CONEXÃO</span>
+                    <span class="panel-tag">PID 005</span>
+                </div>
+
+                <div class="contato-body">
+                    <p class="terminal-line"><span class="t-prompt">$</span> ssh research@input.ufpe.br</p>
+                    <p class="contato-sub">Para colaborações, parcerias e oportunidades de pesquisa:</p>
+                    <a href="mailto:lab.input@gmail.com" class="contato-email">
+                        <span class="email-prompt">&gt;</span> lab.input@gmail.com
+                    </a>
+                    <p class="terminal-line contato-ping"><span class="t-prompt">$</span> ping input.ufpe.br — <span class="ping-ok">64 bytes recebidos. TTL=64</span></p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =============================================
+         FOOTER — barra de status do sistema operacional
+    ============================================= -->
+    <footer class="main-footer">
+        
+        <div class="footer-statusbar">
+
+            <!-- esquerda: identidade -->
+            <div class="status-left">
+                <img src="imagens/input-logo.svg" class="footer-logo" alt="INPUT" width="28">
+                <span class="status-text">input/<strong>OS</strong> v2.6.1</span>
+                <span class="status-sep">·</span>
+                <span class="status-text">UFPE — Recife, Brasil</span>
+            </div>
+
+            <!-- centro: links rápidos -->
+            <div class="status-center">
+                <a href="#pesquisa" class="footer-nav">PESQUISA</a>
+                <a href="#extensao" class="footer-nav">EXTENSÃO</a>
+                <a href="#projetos" class="footer-nav">PROJETOS</a>
+                <a href="#pessoas" class="footer-nav">PESSOAS</a>
+            </div>
+
+            <!-- direita: copyright + clock -->
+            <div class="status-right">
+                <span class="status-text">© 2026 INPUT</span>
+                <span class="status-sep">·</span>
+                <span class="status-text" id="footerClock">--:--</span>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- CURSOR CUSTOM — não modificado -->
+    <div class="custom-cursor">
+        <img src="imagens/pointer-main.svg" alt="cursor">
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>lucide.createIcons();</script>
+
+</body>
+</html>
