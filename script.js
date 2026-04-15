@@ -268,3 +268,57 @@ window.addEventListener('load', () => {
     setupScrollReveals();
     animateCounters();
 });
+
+//===========
+// CARD voador
+//============
+
+const makeDraggable = (element) => {
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+    element.onmousedown = dragMouseDown;
+
+    function dragMouseDown(e) {
+        e.preventDefault();
+        // Posição inicial do mouse
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+        element.style.transition = "none";
+    }
+
+    function elementDrag(e) {
+        e.preventDefault();
+        // Calcula o deslocamento
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        
+        // Define a nova posição do card
+        element.style.top = (element.offsetTop - pos2) + "px";
+        element.style.left = (element.offsetLeft - pos1) + "px";
+    }
+
+    function closeDragElement() {
+        // Para de mover quando o mouse é solto
+        document.onmouseup = null;
+        document.onmousemove = null;
+        element.style.transition = "box-shadow 0.3s ease, transform 0.3s ease";
+    }
+}
+
+// Inicializa o arraste no seu card
+makeDraggable(document.getElementById("card1"));
+// Ativa o movimento para o card da frente
+makeDraggable(document.getElementById("card2"));
+
+// DICA EXTRA: Para um card passar à frente do outro ao clicar
+const cards = document.querySelectorAll('.card-os');
+cards.forEach(card => {
+    card.addEventListener('mousedown', () => {
+        cards.forEach(c => c.style.zIndex = "10");
+        card.style.zIndex = "100";
+    });
+});
