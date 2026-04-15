@@ -1402,3 +1402,138 @@ html, body, a, button, .nav-item, .logo-box { cursor: none !important; }
     .process-row { grid-template-columns: 1fr; gap: 8px; }
     .proc-cpu, .proc-status { display: none; }
 }
+
+/* CARD OS GLASS */
+:root {
+    --bg-os: #E6E6EE;
+    --stroke-color: #A9BAC6;
+    --fill-outer: rgba(220, 227, 232, 0.2);
+    --fill-inner: rgba(241, 241, 241, 0.1);
+    --inner-shadow-color: rgba(255, 253, 242, 0.58);
+}
+
+.os-viewport {
+    background-color: #F1F1F1;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Gilroy', sans-serif;
+}
+
+/* Bolhas coloridas para ver o efeito de vidro */
+.bg-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    z-index: 1;
+}
+.blob-1 { width: 300px; height: 300px; background: #67b2d5; top: 20%; left: 30%; opacity: 0.3; }
+.blob-2 { width: 250px; height: 250px; background: #A9BAC6; bottom: 20%; right: 35%; opacity: 0.4; }
+
+.cards-container {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+}
+
+/* O Estilo fidedigno do seu Figma */
+.card-os {
+    width: 200px; /* */
+    height: 360px; /* */
+    
+    /* Removemos o padding para que o interno encoste nas bordas laterais */
+    padding: 0; 
+    
+    display: block; 
+    position: absolute;
+    cursor: grab;
+    user-select: none; /* Evita selecionar texto ao arrastar */
+    touch-action: none; /* Melhora performance em telas touch */
+    transition: none !important;
+    overflow: hidden; /* Garante que o interno não saia do arredondamento do pai */
+
+    background: rgba(235, 235, 235, 0.4) !important; /* */
+    border-radius: 16px 4px 4px 4px; /* */
+    
+    /* Bordas conforme seu Figma */
+    border-style: solid;
+    border-width: 1.3px 0px 1.3px 0px; /* */
+    border-color: rgb(28, 27, 31, 1);
+    
+    /* EFEITO GLASS */
+    backdrop-filter: blur(3px) saturate(180%) !important; /* */
+    -webkit-backdrop-filter: blur(3px) saturate(180%) !important; /* */
+    box-shadow: none;
+    
+    /* Transição suave para o efeito não dar "soco" */
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card-os:hover {
+    box-shadow: 
+        inset 0 -30px 50px 0 rgba(255, 253, 242, 0.5); 
+    
+    /* Opcional: Um leve movimento para cima para reforçar a elevação */
+    transform: translateY(0px);
+    border-color: #9fabaf;
+    transition: all 0.3s ease;
+}
+
+.card-os:active {
+    cursor: grabbing;
+}
+
+/* Área invisível no topo para facilitar o clique de arrasto */
+.drag-handle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    z-index: 10;
+}
+
+.card-os-inner {
+    /* 1. MESMA LARGURA: 100% do card externo */
+    width: 100%; 
+    
+    /* 2. DISTÂNCIA DO TOPO: Exatamente 20px */
+    margin-top: 20px; 
+    
+    /* Altura exata do seu Figma */
+    height: 360px; /* */
+
+    background-color: rgba(241, 241, 241, 0.3); /* */
+    border-radius: 16px 4px 4px 4px; /* */
+    
+    /* Borda branca fina do Figma */
+    border: 0.5px solid #fffef6; /* */
+    
+    /* Para o conteúdo não encostar no teto do interno */
+    padding: 20px; 
+    box-sizing: border-box;
+}
+
+
+/* Lógica de sobreposição */
+.card-back {
+    top: 100px; 
+    left: 100px;
+}
+
+.card-front {
+    top: 180px; 
+    left: 250px; 
+    z-index: 20;
+}
+
+/* Tipografia */
+.title { color: #67b2d5; font-size: 18px; margin: 0; font-weight: 300; }
+.title strong { font-weight: 900; }
+.status { color: rgba(103, 178, 213, 0.6); font-size: 8px; letter-spacing: 1px; margin-top: 5px; font-family: 'Space Mono', monospace; }
+.label { font-size: 8px; color: var(--stroke-color); letter-spacing: 2px; }
