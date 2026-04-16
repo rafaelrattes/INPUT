@@ -76,7 +76,7 @@ function updateCursorHoverState() {
 }
 
 function setupComponentHovers() {
-    const elements = document.querySelectorAll('.nav-item, .circle-icon, .btn-small, .btn-link, .logo-box, .logo-container, .contato-email, .job-link, .log-link, .registry-link');
+    const elements = document.querySelectorAll('.nav-item, .circle-icon, .btn-small, .btn-link, .logo-box, .logo-container, .contato-email, .job-link, .log-link, .registry-link, .card-os');
     elements.forEach(el => {
         el.addEventListener('mouseenter', () => el.classList.add('is-hovering'));
         el.addEventListener('mouseleave', () => el.classList.remove('is-hovering'));
