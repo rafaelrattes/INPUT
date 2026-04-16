@@ -12,7 +12,7 @@ const speed = 0.15, waveWidth = 35, maxAmplitude = 16;
 
 let cursorMouseX = window.innerWidth / 2, cursorMouseY = window.innerHeight / 2;
 let cursorCurrentX = cursorMouseX, cursorCurrentY = cursorMouseY;
-const speedCursor = 0.15;
+const speedCursor = 0.30;
 
 // ==========================
 // SISTEMA DE ONDA
